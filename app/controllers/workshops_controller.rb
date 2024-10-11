@@ -3,28 +3,25 @@ class WorkshopsController < ApplicationController
 
   # GET /workshops or /workshops.json
   def index
+    base=Workshop
+
     if (params[:sort_order] != nil)
       case params[:sort_order]
       when "date"
-        @workshops=Workshop.all.order(:date)
+        base=base.order(params[:sort_order])
       end
-    else
-      @workshops = Workshop.all
     end
 
-    if (params[:search_by_city] != nil || params[:search_by_category] != nil )
-
-      @workshops = Workshop.all
+    #if (params[:search_by_city] != nil || params[:search_by_category] != nil )
       if params[:search_by_city] && params[:search_by_city] != ""
-        @workshops = @workshops.where('city LIKE ?', 
-        "%#{params[:search_by_city]}%")
+        base = base.where('city LIKE ?', "%#{params[:search_by_city]}%")
       end
       if params[:search_by_category] && params[:search_by_category] != ""
-        @workshops = @workshops.where("category like ?", 
-        "%#{params[:search_by_category]}%")
+        base = base.where("category like ?", "%#{params[:search_by_category]}%")
       end
-    end
+    #end
 
+    @workshops=base.all
   end
 
   # GET /workshops/1 or /workshops/1.json
