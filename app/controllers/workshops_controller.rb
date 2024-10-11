@@ -11,6 +11,20 @@ class WorkshopsController < ApplicationController
     else
       @workshops = Workshop.all
     end
+
+    if (params[:search_by_city] != nil || params[:search_by_category] != nil )
+
+      @workshops = Workshop.all
+      if params[:search_by_city] && params[:search_by_city] != ""
+        @workshops = @workshops.where('city LIKE ?', 
+        "%#{params[:search_by_city]}%")
+      end
+      if params[:search_by_category] && params[:search_by_category] != ""
+        @workshops = @workshops.where("category like ?", 
+        "%#{params[:search_by_category]}%")
+      end
+    end
+
   end
 
   # GET /workshops/1 or /workshops/1.json

@@ -48,4 +48,14 @@
 <br>
 <%= link_to "Sort by date", workshops_path(sort_order: :date) %>
 <br>
+<br>
+<%= form_tag "/workshops", method: "GET" do %>
+  <%= label_tag :search_by_city %>
+  <%= text_field_tag :search_by_city, params[:search_by_city] %>
+  <%= label_tag :search_by_category %>
+  <%= text_field_tag :search_by_category, params[:search_by_category] %>
+  
+  <%= submit_tag "Search" %>
+<% end %>
+<br>
 <%= link_to 'New Workshop', new_workshop_path %>
