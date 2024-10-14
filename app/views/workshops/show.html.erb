@@ -49,6 +49,19 @@
   <%= @workshop.location %>
 </p>
 
+<strong>Mappa</strong>
+<div style="display: inline-block; vertical-align: top; margin-left: 10px;">
+  <iframe 
+    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAedQz45HHie8kinzZxcFbXkGGXGg34ues&q=<%= @workshop.location %>" 
+    width="300" 
+    height="300" 
+    style="border:0" 
+    allowfullscreen="" 
+    loading="lazy">
+  </iframe>
+</div>
+
+
 <p>
   <strong>Description:</strong>
   <%= @workshop.description %>
