@@ -30,7 +30,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 
 gem 'devise'
-
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
 
 
 group :development, :test do

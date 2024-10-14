@@ -6,6 +6,10 @@
   <%= button_to "Sign up", new_user_registration_path, method: :get %> 
   <%= button_to "Sign in", new_user_session_path %>
 
+  <%- if false %>
+  <%= button_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, method: :post, :data => {turbo: "false"} %>
+  <% end %>
+
 <% end %>
 
 <h1>WorkshopFinder</h1>
