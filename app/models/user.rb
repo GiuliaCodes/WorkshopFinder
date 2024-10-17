@@ -13,11 +13,11 @@ class User < ApplicationRecord
             # Uncomment the section below if you want users to be created if they don't exist
             unless user
               user = User.create(
-                    #name: data["name"],
+                    username: data["name"],
                     email: data["email"],
                     #encrypted_password: Devise.friendly_token[0,20]
                     password: Devise.friendly_token[0,20],
-                    uid: access_token[:uid], provider: 'google'       #vanno messi?
+                    uid: access_token[:uid], provider: access_token[:provider]       #vanno messi?
               )
             end
               user
