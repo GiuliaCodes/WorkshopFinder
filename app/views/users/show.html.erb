@@ -1,6 +1,10 @@
-<p id="notice"><%= notice %></p>
+
+<% if false %>
+<p id="notice"> Questo mostra messaggio di login duplicato se lasciato perchè ci sono notice in applicaiton.html.erb già<%= notice %></p>
+<% end %>
+
 <% if user_signed_in? %> 
- <h1> Welcome <%= current_user.username %> </h1> 
+ <h1> Welcome, <%= current_user.username %> </h1> 
 <% end %>
 
 <p>
@@ -11,10 +15,17 @@
   <%= @user.email %>
 </p>
 
-<% if user_signed_in? %> 
+<p>
+  TO DO: add user's workshops sections, only if signed in?
+</p>
+
+<% if user_signed_in? && current_user == @user %> 
   <%= link_to "Find workshop", workshops_path %> |
   <%= link_to 'Edit Profile', edit_user_registration_path(@user) %> 
-    <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
-
+  <br>
+  <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+  <br>
+  <% if current_user.is_admin? %> 
+    <%= link_to 'all users', users_path %>
+  <% end %>
 <% end %>
-<%= link_to 'all users', users_path %>

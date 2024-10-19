@@ -39,12 +39,14 @@
         <% end %>
         <td><%= link_to 'Show', workshop %></td>
         <td><%= link_to 'Edit', edit_workshop_path(workshop) %></td>
-        <td><%= button_to 'Destroy', workshop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        
-        <% if false %>
-        link_to doesen't work
-        <td><%= link_to 'Destroy', workshop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+        <% if can? :destroy, workshop %>
+          <td><%= button_to 'Destroy', workshop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
+          <% if false %>
+          using button to, because link_to doesen't work with delete
+          <td><%= link_to 'Destroy', workshop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
 
       </tr>
     <% end %>
@@ -64,8 +66,8 @@
   <%= submit_tag "Search" %>
 <% end %>
 <br>
+
 <%= link_to 'Organize a Workshop', new_workshop_path %>
 <% if user_signed_in? %> 
   | <%= link_to "Your profile", user_path(current_user.id) %> 
-
 <% end %>

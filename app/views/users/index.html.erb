@@ -18,25 +18,22 @@
         <td><%= user.username %></td>
         <td><%= user.email %></td>
         <td>
-        <% if user.is_admin? %>
-        admin
-        <%end %>
-        <% if user.is_user? %>
-        user
-        <%end %>
-        <% if user.is_partecipant? %>
-        partecipant
-        <%end %>
-        <% if user.is_organizer? %>
-        organizer
-        <%end %> 
+          <% if user.is_admin? %> admin <%end %>
+          <% if user.is_user? %> user <%end %>
+          <% if user.is_partecipant? %> partecipant <%end %>
+          <% if user.is_organizer? %> organizer <%end %> 
         </td>
-        <td><%= link_to 'Show', user %></td>
-        <% if user_signed_in? && current_user.email==user.email %> 
+
+        <% if user_signed_in? && current_user==user %> 
+          <td><%= link_to 'Show', user %></td>
           <td> <%= link_to 'Edit Profile', edit_user_registration_path(user) %></td>
         <% end %>
+        
+        <% if can? :destroy, User %>
         <td><%= button_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <% end %>
+
+        </tr>
     <% end %>
   </tbody>
 </table>

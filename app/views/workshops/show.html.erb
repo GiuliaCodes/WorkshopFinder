@@ -49,7 +49,7 @@
   <%= @workshop.location %>
 </p>
 
-<strong>Mappa</strong>
+<strong>Mappa: </strong>
 <div style="display: inline-block; vertical-align: top; margin-left: 10px;">
   <iframe 
     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAedQz45HHie8kinzZxcFbXkGGXGg34ues&q=<%= @workshop.location %>" 
@@ -66,6 +66,34 @@
   <strong>Description:</strong>
   <%= @workshop.description %>
 </p>
+-----------------------------------------------------------------------------------------------------<br>
+This section must be reworked! <br>
 
 <%= link_to 'Edit', edit_workshop_path(@workshop) %> |
+<%= link_to 'Back', workshops_path %>  <-- remove this line 
+<br>
+
+<% if user_signed_in? %> 
+<% if current_user.is_user? %> 
+As User: Book your spot  | See Reviews | <%= link_to 'Back', workshops_path %>
+<br>
+<% end %>
+<% if current_user.is_partecipant? %> 
+As Partecipant: Cancel you partecipation | Leave a Review | <%= link_to 'Back', workshops_path %>
+<br>
+<% end %>
+<% if current_user.is_organizer? %> 
+<%= link_to 'Edit', edit_workshop_path(@workshop) %> |
+As organzier: See partecipants |
 <%= link_to 'Back', workshops_path %>
+<br>
+<% end %>
+<% if current_user.is_admin? %> 
+As admin: 
+ <td><%= button_to 'Remove Workshop', @workshop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+ | See Reviews | <%= link_to 'Back', workshops_path %>
+<br>
+<% end %>
+<% end %>
+<br>
+<br>
