@@ -1,0 +1,28 @@
+<h2> Add a review to <%= @workshop.name %> </h2>
+
+<%= form_tag workshop_reviews_path(@workshop), class: 'form' do %>
+	<label class="col-form-label"> <%= current_user.username %>'s comment: </label><br>
+	<%= text_area_tag('review[description]', nil, placeholder: 'Write here', size: '150x5') %> <br>
+	<%= submit_tag 'Add Review' %>
+
+	<% if @review.errors.any? %>
+		<div id="error_explanation">
+		<h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+		<ul>
+			<% @review.errors.each do |error| %>
+			<li><%= error.full_message %></li>
+			<% end %>
+		</ul>
+		</div>
+  	<% end %>
+
+<% end %>
+
+<%= link_to 'Back to reviews', workshop_reviews_path %> |
+<%= link_to 'Back to workshop',  workshop_path(@workshop) %>
+
+<% if false %>
+<%= render 'form', review: @review %>
+<% end %>
+

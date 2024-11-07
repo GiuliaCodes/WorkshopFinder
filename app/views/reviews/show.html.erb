@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+<strong>Review by:</strong> <%= User.find( @review.user_id).username %>
+</p>
+<p>
+  <strong>Description:</strong> <%= @review.description %>
+</p>
+
+
+<% if  !current_user.nil? && current_user.id == @review.user_id %>
+            <%= link_to 'Edit', edit_workshop_review_path(@review.workshop_id, @review) %> |
+<% end %>
+
+<%= link_to 'Back to reviews', workshop_reviews_path %> |
+<%= link_to 'Back to workshop',  workshop_path(@workshop) %>

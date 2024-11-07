@@ -24,6 +24,9 @@ class User < ApplicationRecord
   
   acts_as_user :roles => [:user, :partecipant, :organizer, :admin]
 
+  has_many :reviews
+
+
 =begin   #ruolo M ha k bit a 1
   def set_roleM do
     self.roles_mask == self.roles_mask | (K)

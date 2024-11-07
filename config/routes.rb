@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  #resources :reviews
   #devise_for :users
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks', registrations: 'users/registrations' }
   resources :users, only: [:index, :show, :destroy]
@@ -8,6 +9,8 @@ Rails.application.routes.draw do
   
   root to: "home#index"
 
-  resources :workshops
+  resources :workshops do
+    resources :reviews
+  end
   #root:to => redirect('/workshops')
 end

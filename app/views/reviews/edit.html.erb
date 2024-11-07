@@ -1,0 +1,36 @@
+<h2>Editing Review</h2>
+
+<%= form_with model: [ @workshop, @review ] do |form| %> 
+
+	<% if @review.errors.any? %>
+		<div id="error_explanation">
+		<h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+		<ul>
+			<% @review.errors.each do |error| %>
+			<li><%= error.full_message %></li>
+			<% end %>
+		</ul>
+		</div>
+	<% end %>
+  
+	<div class="field">
+	  <%= form.label :description %><br>
+	  <%= form.text_area :description, size: "150x5" %>
+
+	</div>
+  
+	<div class="actions">
+	  <%= form.submit "Save changes" %>
+	</div>
+	
+<% end %>
+
+<%= link_to 'Back to reviews', workshop_reviews_path %> |
+<%= link_to 'Back to workshop',  workshop_path(@workshop) %>
+
+<% if false %>
+<%= render 'form', review: @review %>
+<%= link_to 'Show', @review %> |
+<%= link_to 'Back', reviews_path %>
+<% end %>
