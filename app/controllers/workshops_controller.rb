@@ -1,6 +1,9 @@
 class WorkshopsController < ApplicationController
   before_action :set_workshop, only: %i[ show edit update destroy ]
 
+  before_action :has_user, :only => [:new, :create]
+
+
   # GET /workshops or /workshops.json
   def index
     base=Workshop
@@ -85,4 +88,13 @@ class WorkshopsController < ApplicationController
     def workshop_params
       params.require(:workshop).permit(:name, :category, :city, :date, :time, :length, :max_partecipants, :price, :location, :description)
     end
+
+    protected
+      def has_user
+        unless current_user
+          flash[:notice] = 'You must be logged in to organize a workshop.'
+          redirect_to root_path and return
+        end
+    end
+
 end

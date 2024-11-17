@@ -100,7 +100,7 @@ class ReviewsController < ApplicationController
     protected
       def has_user_and_workshop
         unless current_user
-          flash[:notice] = 'You must be logged in to create a review.'
+          flash[:notice] = 'You must be logged in to leave a review.'
           redirect_to root_path and return
         end
         unless (@workshop = Workshop.where(:id => params[:workshop_id]).first)
