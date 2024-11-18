@@ -10,6 +10,7 @@
       <th>Category</th>
       <th>City</th>
       <th>Date</th>
+      <th>Organizer </th>
       <% if false %>
       <th>Time</th>
       <th>Length</th>
@@ -29,6 +30,7 @@
         <td><%= workshop.category %></td>
         <td><%= workshop.city %></td>
         <td><%= workshop.date %></td>
+        <td><%= User.find( workshop.organizer_id).username  %></td>
         <% if false %>
         <td><%= workshop.time %></td>
         <td><%= workshop.length %></td>

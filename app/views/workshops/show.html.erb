@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @workshop.name %></h1>
+<h4> a workshop by <%= User.find(@workshop.organizer_id).username %> </h4>
 
 <% if false %>
 <p>
@@ -76,26 +77,32 @@ This section must be reworked! <br>
 <br>
 
 <% if user_signed_in? %> 
-<% if current_user.is_user? %> 
+
+<% if current_user.is_user? && @workshop.organizer_id != current_user.id %> 
 As User: Book your spot  | <%= link_to 'See Reviews', workshop_reviews_path(@workshop) %> | <%= link_to 'Back', workshops_path %> 
 <br>
 <% end %>
+
 <% if current_user.is_partecipant? %> 
 As Partecipant: Cancel you partecipation | <%= link_to 'Leave a Review', new_workshop_review_path(@workshop) %>
  | <%= link_to 'Back', workshops_path %>
 <br>
 <% end %>
-<% if current_user.is_organizer? %> 
-As organzier: <%= link_to 'Edit', edit_workshop_path(@workshop) %> | See partecipants |
+
+<% if current_user.is_organizer? && @workshop.organizer_id == current_user.id%> 
+As organzier: <%= link_to 'Edit', edit_workshop_path(@workshop) %> | 
+<%= button_to 'Remove Workshop', @workshop, method: :delete, data: { confirm: 'Are you sure?' } %> | See partecipants |
 <%= link_to 'Back', workshops_path %>
 <br>
 <% end %>
+
 <% if current_user.is_admin? %> 
 As admin: 
  <td><%= button_to 'Remove Workshop', @workshop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
  | <%= link_to 'See Reviews', workshop_reviews_path(@workshop) %> | <%= link_to 'Back', workshops_path %>
 <br>
 <% end %>
+
 <% end %>
 <br>
 <br>

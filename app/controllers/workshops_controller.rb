@@ -43,10 +43,16 @@ class WorkshopsController < ApplicationController
   # POST /workshops or /workshops.json
   def create
     @workshop = Workshop.new(workshop_params)
+    @workshop.organizer_id= current_user.id
+
+    u=User.find(current_user.id)
+    if (!u.is_organizer?)
+      u.set_organizer
+    end
 
     respond_to do |format|
       if @workshop.save
-        format.html { redirect_to @workshop, notice: "Workshop was successfully created." }
+        format.html { redirect_to @workshop, notice: "Workshop was successfully created. You are now an organizer :)" }
         format.json { render :show, status: :created, location: @workshop }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -72,6 +78,12 @@ class WorkshopsController < ApplicationController
   def destroy
     @workshop.destroy
 
+    #bisogna rimuovere il ruolo di organizzatore se non ci sono altri workshop organizzati dall'utente corrispondente
+    u=User.find(@workshop.organizer_id)
+    if (u.is_organizer? && Workshop.where(organizer_id: @workshop.organizer_id).empty?)
+      u.unset_organizer
+    end
+    
     respond_to do |format|
       format.html { redirect_to workshops_path, status: :see_other, notice: "Workshop was successfully destroyed." }
       format.json { head :no_content }

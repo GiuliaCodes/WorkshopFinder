@@ -16,12 +16,29 @@
 </p>
 
 <p>
-  TO DO: add user's workshops sections, only if signed in?
+  <% if user_signed_in? && current_user.id==@user.id %>
+  <% if ! Workshop.where( organizer_id: @user.id).empty? %>
+  <h4> Workshops you are hosting: </h4>
+  <table>
+    <tbody>
+      <% Workshop.where( organizer_id: @user.id).each do |workshop| %>
+        <tr>
+          <td><%= workshop.name %></td>
+          <td><%= link_to 'Show', workshop %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+
+<h4> Your Bookings: </h4>
+TO DO
+<% end %>
 </p>
 
-<% if user_signed_in? && current_user == @user %> 
-  <%= link_to "Find workshop", workshops_path %> |
-  <%= link_to 'Edit Profile', edit_user_registration_path(@user) %> 
+<%= link_to "Find workshop", workshops_path %> 
+<% if user_signed_in? && current_user == @user %>  
+| <%= link_to 'Edit Profile', edit_user_registration_path(@user) %> 
   <br>
   <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
   <br>
