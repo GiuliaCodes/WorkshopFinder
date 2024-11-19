@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1> <%= @workshop.name %> bookings </h1>
+<br> There are <%= Booking.where(workshop_id: @workshop.id).count %> / <%= @workshop.max_partecipants %> partecipants <br>
+<br>
+
+<table>
+  <thead>
+    <tr> 
+      <th> Username </th>
+      <th> Email </th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bookings.each do |booking| %>
+      <tr>
+        <td><%= User.find(booking.user_id).username %></td>
+        <td><%= User.find(booking.user_id).email %></td>
+        <% if  !current_user.nil? && current_user.id == booking.user_id %>
+        <td><%= link_to 'Show', workshop_booking_path(@workshop, booking) %></td>
+        <td><%= button_to 'Cancel booking', workshop_booking_path(@workshop, booking), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back to workshop', workshop_path(@workshop) %>
+
+
+

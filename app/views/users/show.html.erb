@@ -30,9 +30,20 @@
     </tbody>
   </table>
   <% end %>
-
-<h4> Your Bookings: </h4>
-TO DO
+  
+<% if ! Booking.where( user_id: @user.id).empty? %>
+  <h4> Your Bookings: </h4>
+  <table>
+    <tbody>
+      <% Booking.where( user_id: @user.id).each do |booking| %>
+        <tr>
+          <td><%= Workshop.where(id: booking.workshop_id).first.name %></td>
+          <td> <%= link_to 'Show', workshop_booking_path(booking.workshop_id, booking) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
 <% end %>
 </p>
 

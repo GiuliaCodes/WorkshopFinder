@@ -29,6 +29,9 @@ class WorkshopsController < ApplicationController
 
   # GET /workshops/1 or /workshops/1.json
   def show
+    if user_signed_in?
+    @booking= Workshop.find(params[:id]).bookings.where(user_id:current_user.id).first
+    end
   end
 
   # GET /workshops/new

@@ -24,7 +24,8 @@ class User < ApplicationRecord
   
   acts_as_user :roles => [:user, :partecipant, :organizer, :admin]
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
+  has_many :bookings, dependent: :destroy
 
 
 =begin   #ruolo M ha k bit a 1

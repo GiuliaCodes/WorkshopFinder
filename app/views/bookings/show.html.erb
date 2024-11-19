@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+Hello, <%= User.find(@booking.user_id).username %>
+<h2> This is your booking </h2> for <%= @workshop.name %>
+on <%= @workshop.date %> 
+<br>
+
+<br>
+<%= button_to 'Cancel your booking', workshop_booking_path(@workshop, @booking), method: :delete, data: { confirm: 'Are you sure?' } %>
+<br>
+<br>
+<%= link_to 'Back to workshop',  workshop_path(@workshop) %>
+
+
+
+<% if false %>
+<%= link_to 'Edit', edit_booking_path(@booking) %> |
+<% end %>
+
+

@@ -39,6 +39,9 @@
 </table>
 
 <%= link_to "Find workshop", workshops_path %> 
+<% if user_signed_in? %> 
+  | <%= link_to "Your profile", user_path(current_user.id) %> 
+<% end %>
 
 <br>
 
