@@ -1,7 +1,4 @@
-<h1>New Booking</h1>
-
-Book your spot for <%= @workshop.name %>
-on <%= @workshop.date %>
+<h3> Book your spot for: <%= @workshop.name %> </h3>
 
 <%= form_with model: [@workshop, @booking] do |form| %>
     <% if @booking.errors.any? %>
@@ -17,7 +14,7 @@ on <%= @workshop.date %>
     <% end %>
   
     <div class="actions">
-      <%= form.submit "Book your spot <3" %>
+      <%= form.submit "Reserve me a spot" %>
     </div>
   <% end %>
 

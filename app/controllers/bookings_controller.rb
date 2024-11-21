@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: %i[ show edit update destroy ]
+  #before_action :can_be_booked, only: [:new, :create]   #uncomment to make it so that you cannot book a workshop if it's date has passed
 
   # GET /bookings or /bookings.json
   def index
@@ -77,12 +78,9 @@ class BookingsController < ApplicationController
     if (u.is_partecipant? && Booking.where(user_id: @booking.user_id).empty?)
       u.unset_partecipant
     end
-    #non funziona :(
-
-
 
     respond_to do |format|
-      format.html { redirect_to workshop_bookings_path, status: :see_other, notice: "Booking was successfully destroyed." }
+      format.html { redirect_to workshop_path(@workshop), status: :see_other, notice: "Booking was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -97,4 +95,12 @@ class BookingsController < ApplicationController
     def booking_params
       params.fetch(:booking, {})
     end
+
+    protected
+      def can_be_booked
+        @workshop=Workshop.find(params[:workshop_id])
+        if (Date.current >= @workshop.date )
+          redirect_to workshop_path(@workshop), :alert => "This workshop doesn't accept bookings anymore"
+        end
+      end
 end

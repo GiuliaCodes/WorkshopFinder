@@ -1,6 +1,8 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: %i[ show edit update destroy ]
   before_action :has_user_and_workshop, :only => [:new, :create]
+  before_action :can_be_reviewed, :only => [:new, :create]
+
   
   # GET /reviews or /reviews.json
   def index
@@ -109,5 +111,10 @@ class ReviewsController < ApplicationController
         end
       end
 
+      def can_be_reviewed
+        if ( Date.current < @workshop.date )
+          redirect_to workshop_path(@workshop), :alert => "It's too soon to review this workshop. It will take place on "+@workshop.date.to_s
+        end
+      end
 
 end

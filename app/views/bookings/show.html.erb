@@ -1,7 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<% if  !current_user.nil? && current_user.id == @booking.user_id %>
+
 Hello, <%= User.find(@booking.user_id).username %>
-<h2> This is your booking </h2> for <%= @workshop.name %>
+<h3> This is your booking </h3> for <%= @workshop.name %>
 on <%= @workshop.date %> 
 <br>
 
@@ -11,10 +13,10 @@ on <%= @workshop.date %>
 <br>
 <%= link_to 'Back to workshop',  workshop_path(@workshop) %>
 
-
-
-<% if false %>
-<%= link_to 'Edit', edit_booking_path(@booking) %> |
+<% if user_signed_in? %> 
+  | <%= link_to "Your profile", user_path(current_user.id) %> 
 <% end %>
 
+<% end %>
 
+<br><h1> Modifica questa view. O basta dare permesso di accesso  permesso solo a partecipant? </h1>

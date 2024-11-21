@@ -50,10 +50,16 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     authorize! :destroy, @user, :message => "You are not authorized"
+    
+    Workshop.where(organizer_id: @user.id).delete_all  #prima di cancellare l'utente, cancello tutti i workshop che ha creato.
+    #funziona solo per link che utilizzano questo controller (es. se admin cancella utente)
+    #non funziona se utente cancella il suo account (perché per questo utilizza registrations_contoller)
+    #perciò aggiunto riga anche in registrations_controller.
+
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_path, status: :see_other, notice: "User was successfully destroyed." }
+      format.html { redirect_to users_path, status: :see_other, notice: "User was successfully destroyed."+@user.username.to_s }
       format.json { head :no_content }
     end
   end

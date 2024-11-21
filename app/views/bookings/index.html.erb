@@ -31,5 +31,8 @@
 
 <%= link_to 'Back to workshop', workshop_path(@workshop) %>
 
+<% if user_signed_in? %> 
+  | <%= link_to "Your profile", user_path(current_user.id) %> 
+<% end %>
 
 
