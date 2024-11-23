@@ -40,16 +40,13 @@
         <td><%= workshop.description %></td>
         <% end %>
         <td><%= link_to 'Show', workshop %></td>
-        
-        <% if user_signed_in? %>
 
-          <% if current_user.is_organizer? && workshop.organizer_id == current_user.id %>
-            <td><%= link_to 'Edit', edit_workshop_path(workshop) %></td>
-          <%end %>
-          <% if current_user.is_admin? || (current_user.is_organizer? && workshop.organizer_id == current_user.id) %>
-              <td><%= button_to 'Destroy', workshop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
-        <%end %>
+        <% if can? :update, workshop %>
+          <td><%= link_to 'Edit', edit_workshop_path(workshop) %></td>
+        <% end %>
+        <% if can? :destroy, workshop %>
+          <td><%= button_to 'Destroy', workshop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
 
       </tr>
     <% end %>

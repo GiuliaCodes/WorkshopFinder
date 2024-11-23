@@ -70,6 +70,9 @@ class BookingsController < ApplicationController
 
   # DELETE /bookings/1 or /bookings/1.json
   def destroy
+    authorize! :destroy, @booking, :message => "You cannot delete this booking"
+
+
     @booking.destroy
 
     @workshop=Workshop.find(params[:workshop_id])

@@ -36,15 +36,22 @@ class WorkshopsController < ApplicationController
 
   # GET /workshops/new
   def new
+    authorize! :create, Workshop, :message => "You are not authorized to organize a workshop"
+
     @workshop = Workshop.new
   end
 
   # GET /workshops/1/edit
   def edit
+    authorize! :update, @workshop, :message => "You are not authorized to edit this workshop"
+
   end
 
   # POST /workshops or /workshops.json
   def create
+    authorize! :create, Workshop, :message => "You are not authorized to organize a workshop"
+
+
     @workshop = Workshop.new(workshop_params)
     @workshop.organizer_id= current_user.id
 
@@ -66,6 +73,9 @@ class WorkshopsController < ApplicationController
 
   # PATCH/PUT /workshops/1 or /workshops/1.json
   def update
+
+    authorize! :update, @workshop, :message => "You are not authorized to update this workshop"
+
     respond_to do |format|
       if @workshop.update(workshop_params)
         format.html { redirect_to @workshop, notice: "Workshop was successfully updated." }
@@ -79,6 +89,8 @@ class WorkshopsController < ApplicationController
 
   # DELETE /workshops/1 or /workshops/1.json
   def destroy
+
+    authorize! :destroy, @workshop, :message => "You are not authorized to destroy this workshop"
     @workshop.destroy
 
     #bisogna rimuovere il ruolo di organizzatore se non ci sono altri workshop organizzati dall'utente corrispondente

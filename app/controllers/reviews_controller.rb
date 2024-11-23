@@ -20,6 +20,9 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/new
   def new
+    authorize! :create, Review, message: "You are not authorized to review this workshop!"
+
+
     #@workshop = Workshop.where(:id => params[:workshop_id]).first #has_user_and_workshop lo fa gia per new e create
     @workshop=Workshop.find(params[:workshop_id]) #anche cosi
     @review = Review.new
@@ -27,13 +30,15 @@ class ReviewsController < ApplicationController
 
   # GET /reviews/1/edit
   def edit
+    authorize! :update, @review, message: "You are not authorized to edit this review!"
+
     @workshop=Workshop.find(params[:workshop_id])
     @review = @workshop.reviews.find(params[:id]) 
   end
 
   # POST /reviews or /reviews.json
   def create
-    #aggiungi:  authorize! :create, Review, message: "You are not authorized!" ...
+    authorize! :create, Review, message: "You are not authorized to review this workshop!"
 
     @workshop=Workshop.find(params[:workshop_id])  #inutile con has_user_and_workshop. senza, serve qui e in new
 
@@ -61,6 +66,9 @@ class ReviewsController < ApplicationController
 
   # PATCH/PUT /reviews/1 or /reviews/1.json
   def update
+    authorize! :update, @review, message: "You are not authorized to edit this review!"
+
+
     @review = Workshop.find(params[:workshop_id]).reviews.find(params[:id])
     @workshop=Workshop.find(params[:workshop_id])
 
@@ -77,7 +85,8 @@ class ReviewsController < ApplicationController
 
   # DELETE /reviews/1 or /reviews/1.json
   def destroy
-    #aggiungi     authorize! :destroy, Review, message: "You are not authorized!" ...
+    authorize! :destroy, @review, message: "You are not authorized to delete this review!"
+
 
     @review.destroy
 

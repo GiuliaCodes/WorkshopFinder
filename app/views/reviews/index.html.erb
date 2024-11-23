@@ -18,11 +18,15 @@
         <td><%= User.find( review.user_id).username %></td>
 
         <td><%= link_to 'Show Review', workshop_review_path(@workshop, review) %></td>
-        <% if  !current_user.nil? && current_user.id == review.user_id %>
-          <td><%= link_to 'Edit', edit_workshop_review_path(review.workshop, review) %></td>
+
+        <% if  can? :update, review %>
+        <td><%= link_to 'Edit', edit_workshop_review_path(review.workshop, review) %></td>
         <% end %>
+
+        <% if  can? :destroy, review %>
         <td><%= button_to 'Destroy', workshop_review_path(@workshop, review), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      
+        <% end %>
+
         </tr>
     <% end %>
   </tbody>
@@ -31,6 +35,5 @@
 <br>
 
 
-<%= link_to 'Leave a review', new_workshop_review_path %> |
 <%= link_to 'Back to Workshop', workshop_path(@workshop) %>
 

@@ -69,9 +69,9 @@
 </p>
 
 <br> There are <%= Booking.where(workshop_id: @workshop.id).count %> / <%= @workshop.max_partecipants %> partecipants <br>
------------------------------------------------------------------------------------------------------<br><br>
-This section must be reworked! <br>
 
+-----------------------------------------------------------------------------------------------------<br><br>
+This section must be removed! <br>
 
 <% if user_signed_in? %> 
 
@@ -103,7 +103,7 @@ This section must be reworked! <br>
 
   <% if current_user.is_admin? %> 
   As admin: 
-  <td><%= button_to 'Remove Workshop', @workshop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  <%= button_to 'Remove Workshop', @workshop, method: :delete, data: { confirm: 'Are you sure?' } %>
   | <%= link_to 'See Reviews', workshop_reviews_path(@workshop) %> | <%= link_to 'Back', workshops_path %>
   <br>
   <% end %>
@@ -111,3 +111,43 @@ This section must be reworked! <br>
 <% end %>
 <br>
 <br>
+
+<br>----------------------------------------------<br>
+
+<% if user_signed_in? && current_user.is_user? && 
+    @workshop.organizer_id != current_user.id &&
+    !current_user.bookings.where(workshop_id: @workshop.id).present?
+%> 
+|  <%= link_to 'Book your spot', new_workshop_booking_path(@workshop) %> 
+<% end %>
+
+<% if can? :read, @booking %>
+| <%= link_to 'Show your booking', workshop_booking_path(@workshop, @booking) %> 
+<% end %>
+
+<% if can? :destroy, @booking %>
+| <%= button_to 'Cancel your booking', workshop_booking_path(@workshop, @booking), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+
+<% if can? :update, @workshop %>
+| <%= link_to 'Edit', edit_workshop_path(@workshop) %> 
+<% end %>
+
+<% if can? :destroy, @workshop %>
+| <%= button_to 'Cancel Workshop', @workshop, method: :delete, data: { confirm: 'Are you sure?' } %> 
+<% end %>
+
+<% if can? :read, Review %>
+| <%= link_to 'See Reviews', workshop_reviews_path(@workshop) %> 
+<% end %>
+
+<% if (can? :create, Review) && !User.find(current_user.id).bookings.where(workshop_id: params[:id]).empty? %>
+| <%= link_to 'Leave a Review', new_workshop_review_path(@workshop) %>
+<% end %>
+
+<% if (can? :read, Booking) && @workshop.organizer_id == current_user.id %>
+| <%= link_to 'See partecipants',  workshop_bookings_path(@workshop) %> [can I do this condition better?]
+<% end %>
+
+| <%= link_to 'Back', workshops_path %> 

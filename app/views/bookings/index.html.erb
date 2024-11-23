@@ -18,10 +18,16 @@
       <tr>
         <td><%= User.find(booking.user_id).username %></td>
         <td><%= User.find(booking.user_id).email %></td>
-        <% if  !current_user.nil? && current_user.id == booking.user_id %>
+
+        <% if  (can? :read, booking)  && (!current_user.nil? && current_user.id == booking.user_id) %>
         <td><%= link_to 'Show', workshop_booking_path(@workshop, booking) %></td>
+        <% end %>
+
+        <% if  can? :destroy, booking %>
         <td><%= button_to 'Cancel booking', workshop_booking_path(@workshop, booking), method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
+
+
         </tr>
     <% end %>
   </tbody>

@@ -3,7 +3,7 @@
 <p id="notice"> Questo mostra messaggio di login duplicato se lasciato perchè ci sono notice in applicaiton.html.erb già<%= notice %></p>
 <% end %>
 
-<% if user_signed_in? %> 
+<% if user_signed_in? and current_user==@user %> 
  <h1> Welcome, <%= current_user.username %> </h1> 
 <% end %>
 
@@ -49,7 +49,7 @@
 
 <%= link_to "Find workshop", workshops_path %> 
 <% if user_signed_in? && current_user == @user %>  
-| <%= link_to 'Edit Profile', edit_user_registration_path(@user) %> 
+| <%= link_to 'Edit Profile', edit_user_registration_path %> 
   <br>
   <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
   <br>
