@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: %i[ show edit update destroy ]
-  #before_action :can_be_booked, only: [:new, :create]   #uncomment to make it so that you cannot book a workshop if it's date has passed
+  before_action :can_be_booked, only: [:new, :create]   #uncomment to make it so that you cannot book a workshop if it's date has passed
 
   # GET /bookings or /bookings.json
   def index
