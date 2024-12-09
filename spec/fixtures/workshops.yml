@@ -1,0 +1,31 @@
+# Una fixture è un modo per definire oggetti con valori fissi
+#Le fixtures sono un metodo semplice per creare delle istanze dei modelli senza alterare la base di dati
+#rails g <model> ne crea anche in test/fixtures    
+
+one:
+  id: 1
+  name: WorkshopName1
+  category: WCat1
+  city: WCity1
+  date: 2025-10-11
+  time: WTime1
+  length: WLength1
+  max_partecipants: 3
+  price: Wprice1
+  location: WLocation1
+  description: MyText1
+  organizer_id: 2
+
+two:
+  id: 2
+  name: WorkshopName2
+  category: WCat2
+  city: WCity2
+  date: 2024-10-11
+  time: WTime2
+  length: WLength2
+  max_partecipants: 1
+  price: Wprice2
+  location: WLocation2
+  description: MyText2
+  organizer_id: 6
