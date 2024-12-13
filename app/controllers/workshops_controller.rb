@@ -2,6 +2,7 @@ class WorkshopsController < ApplicationController
   before_action :set_workshop, only: %i[ show edit update destroy ]
 
   before_action :has_user, :only => [:new, :create]
+  before_action :can_edit, :only => [:edit]
 
 
   # GET /workshops or /workshops.json
@@ -122,6 +123,11 @@ class WorkshopsController < ApplicationController
           flash[:notice] = 'You must be logged in to organize a workshop.'
           redirect_to root_path and return
         end
-    end
+      end
+      def can_edit
+        if (!@workshop.date.blank? and @workshop.date <= Date.today)
+          redirect_to workshop_path(@workshop), :alert => "This workshop cannot be edited anymore"
+        end
+      end
 
 end

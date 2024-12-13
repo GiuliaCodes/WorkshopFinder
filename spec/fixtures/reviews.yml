@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 rv1:
-  description: MyText
-  workshop_id: 1
+  description: Rv1Descr
+  workshop_id: 2
   user_id: 3
 
 rv2:
-  description: MyText
-  workshop_id: 1
-  user_id: 6
+  description: Rv2Descr
+  workshop_id: 2
+  user_id: 8

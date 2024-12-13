@@ -8,14 +8,14 @@ class ReviewsController < ApplicationController
   def index
     @workshop=Workshop.find(params[:workshop_id]) 
     @reviews=@workshop.reviews  #solo review del workshop selezionato
-    #@reviews = Review.all  #tutte le reviews. serve?
+    #@reviews = Review.all
 
   end
 
   # GET /reviews/1 or /reviews/1.json
   def show
     @workshop=Workshop.find(params[:workshop_id]) 
-    @review = @workshop.reviews.find(params[:id]) #aggiunta per completezza, ma funziona comunque. come?
+    @review = @workshop.reviews.find(params[:id]) 
   end
 
   # GET /reviews/new
@@ -42,15 +42,15 @@ class ReviewsController < ApplicationController
 
     @workshop=Workshop.find(params[:workshop_id])  #inutile con has_user_and_workshop. senza, serve qui e in new
 
-    #@review=@workshop.reviews.create(review_params) # dal tutorial rails. con questo dà errore "user must exist"
-    ##@review.user_id= current_user.id  #lo aggiungo qua - cosi sembra funzionare. giusto?
+    #@review=@workshop.reviews.create(review_params) # dal tutorial rails. 
+    #@review.user_id= current_user.id  
     
-    #@review=@workshop.reviews.create(description: params[:review][:description], user_id: current_user.id)    #anche così sembra funzionare  
+    #@review=@workshop.reviews.create(description: params[:review][:description], user_id: current_user.id)    #anche così
 
     #come esercitazione:
     @review = Review.new(review_params)
     @workshop.reviews << @review
-    current_user.reviews << @review   #senza questo hai "user must exist"
+    current_user.reviews << @review  
 
     respond_to do |format|
       if @review.save
@@ -95,7 +95,6 @@ class ReviewsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  #destroy va testato di più? da dove prende @review? però sembra funzionare
 
   private
     # Use callbacks to share common setup or constraints between actions.

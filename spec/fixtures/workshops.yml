@@ -10,7 +10,7 @@ one:
   date: 2025-10-11
   time: WTime1
   length: WLength1
-  max_partecipants: 3
+  max_partecipants: 1
   price: Wprice1
   location: WLocation1
   description: MyText1
@@ -24,8 +24,22 @@ two:
   date: 2024-10-11
   time: WTime2
   length: WLength2
-  max_partecipants: 1
+  max_partecipants: 2
   price: Wprice2
   location: WLocation2
   description: MyText2
-  organizer_id: 6
+  organizer_id: 9
+
+three:
+  id: 3
+  name: WorkshopName3
+  category: WCat3
+  city: WCity3
+  date: 2023-10-12
+  time: WTime3
+  length: WLength3
+  max_partecipants: 4
+  price: Wprice3
+  location: WLocation3
+  description: MyText3
+  organizer_id: 9

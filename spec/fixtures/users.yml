@@ -16,10 +16,22 @@ organizer:
   username: username2
   roles_mask: 5
 
+another_organizer:
+  id: 9
+  email: test9@mail.com
+  username: username9
+  roles_mask: 5
+
 partecipant:
   id: 3
   email: test3@mail.com
   username: username3
+  roles_mask: 3
+
+another_partecipant:
+  id: 8
+  email: test8@mail.com
+  username: username8
   roles_mask: 3
 
 admin:

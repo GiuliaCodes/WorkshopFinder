@@ -45,19 +45,25 @@ RSpec.describe Workshop, type: :model do
       expect(workshop2).not_to be_valid
     end
 
-    #altre validation?
 
   end
 
-  #aggiungi test su associazioni?
   context "associations" do
     it "has many reviews" do
-      w= workshops(:one)
+      w= workshops(:two)
       expect(w.reviews).to match_array([reviews(:rv1), reviews(:rv2)])
+    end
+
+    it "workshop one has one booking" do
+      w= workshops(:one)
+      expect(w.bookings.count).to eq(1)
+    end
+    it "workshop two has many bookings" do
+      w= workshops(:two)
+      expect(w.bookings).to match_array([bookings(:booking2), bookings(:booking3)])
     end
   end
 
-  fixtures :all
     it "returns workshop organizer name" do
         w=workshops(:one)
         expect(User.find(w.organizer_id).username).to eq('username2')
