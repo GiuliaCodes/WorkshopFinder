@@ -70,49 +70,8 @@
 
 <br> There are <%= Booking.where(workshop_id: @workshop.id).count %> / <%= @workshop.max_partecipants %> partecipants <br>
 
------------------------------------------------------------------------------------------------------<br><br>
-This section must be removed! <br>
-
-<% if user_signed_in? %> 
-
-  <% if current_user.is_user? && 
-    @workshop.organizer_id != current_user.id &&
-    !current_user.bookings.where(workshop_id: @workshop.id).present?
-  %> 
-    As User: <%= link_to 'Book your spot', new_workshop_booking_path(@workshop) %>
-      | <%= link_to 'See Reviews', workshop_reviews_path(@workshop) %> | <%= link_to 'Back', workshops_path %> 
-    <br>
-  <% end %>
-
-  <% if current_user.is_partecipant? && 
-    !User.find(current_user.id).bookings.where(workshop_id: params[:id]).empty?
-  %> 
-    As partecipant: <%= link_to 'Show your booking', workshop_booking_path(@workshop, @booking) %> 
-    | <%= button_to 'Cancel your booking', workshop_booking_path(@workshop, @booking), method: :delete, data: { confirm: 'Are you sure?' } %> 
-    | <%= link_to 'Leave a Review', new_workshop_review_path(@workshop) %>
-    | <%= link_to 'Back', workshops_path %>
-    <br>
-  <% end %>
-
-  <% if current_user.is_organizer? && @workshop.organizer_id == current_user.id%> 
-    As organzier: <%= link_to 'Edit', edit_workshop_path(@workshop) %> | 
-    <%= button_to 'Remove Workshop', @workshop, method: :delete, data: { confirm: 'Are you sure?' } %> |<%= link_to 'See partecipants',  workshop_bookings_path(@workshop) %> |
-    <%= link_to 'Back', workshops_path %>
-    <br>
-  <% end %>
-
-  <% if current_user.is_admin? %> 
-  As admin: 
-  <%= button_to 'Remove Workshop', @workshop, method: :delete, data: { confirm: 'Are you sure?' } %>
-  | <%= link_to 'See Reviews', workshop_reviews_path(@workshop) %> | <%= link_to 'Back', workshops_path %>
-  <br>
-  <% end %>
-
-<% end %>
 <br>
 <br>
-
-<br>----------------------------------------------<br>
 
 <% if user_signed_in? && current_user.is_user? && 
     @workshop.organizer_id != current_user.id &&
