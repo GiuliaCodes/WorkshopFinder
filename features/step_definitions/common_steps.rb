@@ -23,7 +23,6 @@ When('I fill {string} with {string}') do |string1, string2|
 end
 
 Then('I should see {string}') do |string|
-  #page.has_text?(text)
   expect(page).to have_content(string)
 end
 

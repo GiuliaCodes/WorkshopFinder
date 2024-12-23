@@ -41,7 +41,7 @@ RSpec.describe Workshop, type: :model do
     end
 
     it "cannot be created if date is in the past" do
-      workshop2=Workshop.new(name:"WName", max_partecipants: 10, date: "2024-12-01")      
+      workshop2=Workshop.new(name:"WName", max_partecipants: 10, date: Date.yesterday.to_s )      
       expect(workshop2).not_to be_valid
     end
 

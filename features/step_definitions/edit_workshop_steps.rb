@@ -1,5 +1,6 @@
 Given('a workshop organized by organizer') do
-    workshop = Workshop.create!(:name=> "WorkshopName", :date=>"2026-01-01", :max_partecipants => 2, :organizer_id => 3 )
+    #workshop = Workshop.create!(:name=> "WorkshopName", :date=>"2026-01-01", :max_partecipants => 2, :organizer_id => 3 )
+    workshop = Workshop.create!(:name=> "WorkshopName", :date=> Date.tomorrow.to_s , :max_partecipants => 2, :organizer_id => 3 )
 end
 
 Given('I am on the workshop page') do

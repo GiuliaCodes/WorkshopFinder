@@ -7,7 +7,7 @@ one:
   name: WorkshopName1
   category: WCat1
   city: WCity1
-  date: 2025-10-11
+  date: <%= Date.tomorrow.to_s %>
   time: WTime1
   length: WLength1
   max_partecipants: 1
@@ -21,7 +21,7 @@ two:
   name: WorkshopName2
   category: WCat2
   city: WCity2
-  date: 2024-10-11
+  date: <%= Date.yesterday.to_s %>
   time: WTime2
   length: WLength2
   max_partecipants: 2
@@ -35,7 +35,7 @@ three:
   name: WorkshopName3
   category: WCat3
   city: WCity3
-  date: 2023-10-12
+  date: <%= (Date.yesterday-1).to_s %>
   time: WTime3
   length: WLength3
   max_partecipants: 4
