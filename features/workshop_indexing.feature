@@ -17,7 +17,7 @@ Scenario: Sort workshops by date
     Given a user
     Given I am authenticated as user
     Given I am on the workshops page
-    When I follow "Sort by date"
+    When I follow "Date"
     Then I should see Workshops sorted in order
 
 Scenario: Search workshop by category

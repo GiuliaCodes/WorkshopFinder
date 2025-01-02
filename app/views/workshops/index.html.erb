@@ -9,7 +9,7 @@
       <th>Name</th>
       <th>Category</th>
       <th>City</th>
-      <th>Date</th>
+      <th><%= link_to "Date", workshops_path(sort_order: :date, search_by_city: @city, search_by_category: @category) %></th>
       <th>Organizer </th>
       <% if false %>
       <th>Time</th>
@@ -54,11 +54,17 @@
 </table>
 
 <br>
-<%= link_to "Sort by date", workshops_path(sort_order: :date) %>
+<%= link_to "Sort by date", workshops_path(sort_order: :date, search_by_city: @city, search_by_category: @category) %>
 <br>
 <br>
 <%= form_tag "/workshops", method: "GET" do %>
 
+  <% if false %> #checkbox per sorting
+  <%= check_box_tag :sort_order, value = :date, checked = params[:sort_order] %> Sort by date <br>
+  <% end %>
+
+  <%= hidden_field_tag :sort_order, @order %>
+  
   <%= label_tag :search_by_city %>
   <%= text_field_tag :search_by_city, params[:search_by_city] %>
   
@@ -67,6 +73,10 @@
   
   <%= submit_tag "Search" %>
 <% end %>
+<br>
+
+<%= link_to "Reset Search", workshops_path %>
+<br>
 <br>
 
 <%= link_to 'Organize a Workshop', new_workshop_path %>

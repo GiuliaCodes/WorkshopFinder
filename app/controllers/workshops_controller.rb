@@ -7,6 +7,9 @@ class WorkshopsController < ApplicationController
 
   # GET /workshops or /workshops.json
   def index
+
+# con checkbox per sorting
+=begin
     base=Workshop
 
     if (params[:sort_order] != nil)
@@ -16,16 +19,44 @@ class WorkshopsController < ApplicationController
       end
     end
 
-    #if (params[:search_by_city] != nil || params[:search_by_category] != nil )
       if params[:search_by_city] && params[:search_by_city] != ""
         base = base.where('city LIKE ?', "%#{params[:search_by_city]}%")
       end
       if params[:search_by_category] && params[:search_by_category] != ""
         base = base.where("category like ?", "%#{params[:search_by_category]}%")
       end
-    #end
 
     @workshops=base.all
+
+=end
+
+#con link per sorting
+#=begin
+    base=Workshop
+
+    @order=params[:sort_order]
+    @city=params[:search_by_city]
+    @category=params[:search_by_category]
+
+    if (@order != nil && @order != "")
+      case @order
+      when "date"
+        base=base.order(@order)
+      end
+    end
+
+    if @city && @city != ""
+      base = base.where('city LIKE ?', "%#{@city}%")
+    end
+    if @category && @category != ""
+      base = base.where("category like ?", "%#{@category}%")
+    end
+
+    @workshops=base.all
+#=end
+
+  #flash[:notice] = "params: "+@city.to_s+" "+@category.to_s+" "+@order.to_s
+  
   end
 
   # GET /workshops/1 or /workshops/1.json
