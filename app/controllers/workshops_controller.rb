@@ -87,13 +87,15 @@ class WorkshopsController < ApplicationController
     @workshop = Workshop.new(workshop_params)
     @workshop.organizer_id= current_user.id
 
-    u=User.find(current_user.id)
-    if (!u.is_organizer?)
-      u.set_organizer
-    end
-
     respond_to do |format|
       if @workshop.save
+
+        u=User.find(current_user.id)
+        if (!u.is_organizer?)
+          u.set_organizer
+        end
+
+
         format.html { redirect_to @workshop, notice: "Workshop was successfully created. You are now an organizer :)" }
         format.json { render :show, status: :created, location: @workshop }
       else

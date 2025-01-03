@@ -1,0 +1,18 @@
+<% if user_signed_in? %> 
+    <div class="navbar"> 
+
+        <nav>
+            <ul>
+               <li> <%=link_to "WorkshopFinder", root_path%> </li>  
+
+                <li> <%=link_to "workshops", workshops_path%> </li>
+                
+                <% if user_signed_in? %> 
+                    <li> <%= link_to "profile", user_path(current_user.id) %> </li>
+                <% end %>
+
+            </ul>
+        </nav>
+    
+    </div>
+<% end %>

@@ -19,7 +19,7 @@
   <% if user_signed_in? && current_user.id==@user.id %>
   <% if ! Workshop.where( organizer_id: @user.id).empty? %>
   <h4> Workshops you are hosting: </h4>
-  <table>
+  <table class="usertable">
     <tbody>
       <% Workshop.where( organizer_id: @user.id).each do |workshop| %>
         <tr>
@@ -33,7 +33,7 @@
   
 <% if ! Booking.where( user_id: @user.id).empty? %>
   <h4> Your Bookings: </h4>
-  <table>
+  <table class="usertable">
     <tbody>
       <% Booking.where( user_id: @user.id).each do |booking| %>
         <tr>

@@ -12,32 +12,27 @@
 
   <body>
     <% if false %>
-    <% flash.each do |type, msg| %>
-      <div>
-      Notification: <%= msg %>
-      </div>
+      <% flash.each do |type, msg| %>
+        <div>
+          Notification: <%= msg %>
+        </div>
+      <% end %>
     <% end %>
-    <% end %>
+
+    <%= render "layouts/navbar" %>
  
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <br>
-    <% if not current_user.nil? %> 
-    <b>Your Roles: </b> 
-    <% if current_user.is_admin? %>
-    admin
-    <%end %>
-    <% if current_user.is_user? %>
-    user
-    <%end %>
-    <% if current_user.is_partecipant? %>
-    partecipant
-    <%end %>
-    <% if current_user.is_organizer? %>
-    organizer
-    <%end %> 
-    <%end %>
+    <p class="userroles">
+      <% if not current_user.nil? %> 
+        <b>Your Roles: </b> 
+        <% if current_user.is_admin? %> admin <%end %>
+        <% if current_user.is_user? %>  user <%end %>
+        <% if current_user.is_partecipant? %> partecipant <%end %>
+        <% if current_user.is_organizer? %> organizer <%end %> 
+      <%end %>
+    </p>
 
     <%= yield %>
     

@@ -9,7 +9,7 @@
       <th>Name</th>
       <th>Category</th>
       <th>City</th>
-      <th><%= link_to "Date", workshops_path(sort_order: :date, search_by_city: @city, search_by_category: @category) %></th>
+      <th><%= link_to "Date", workshops_path(sort_order: :date, search_by_city: @city, search_by_category: @category), :class =>"date" %></th>
       <th>Organizer </th>
       <% if false %>
       <th>Time</th>

@@ -17,21 +17,137 @@
 .button_to {
 	display:inline;
 }
-
 .button_to div {
 	display: inline
 }
 
 input[type="submit"], button {
 	background-color: white; 
-	color: black; 
+	color: darkolivegreen; 
+	font-weight: bold;
 	padding: 3px 5px;
-	border: 1px solid black; 
+	border: 1px solid darkolivegreen; 
 	border-radius: 4px; 
-	font-size: 15px; 
-  }
-  
-  input[type="submit"]:hover, button:hover {
-	background-color: black; /* Sfondo nero al passaggio del mouse */
-	color: white; /* Testo bianco al passaggio del mouse */
-  }
+}
+input[type="submit"]:hover, button:hover {
+	background-color: darkolivegreen; 
+	color: white;
+}
+
+a.date {
+	color: darkolivegreen;
+	text-decoration: underline;
+}
+
+a {
+	background: transparent;
+	color: darksalmon;
+	text-decoration: none;
+	font-weight: bold;
+
+	padding: 3px 5px;
+	text-align: center;
+	display: inline-block;
+	border-radius: 4px; 
+}
+a:hover {
+	color: #fff;
+	background-color: darksalmon; 
+}
+
+
+body {
+	padding: 0;
+	background: White;
+	color: darkolivegreen;
+	font-family: Tahoma, Verdana, sans-serif;
+	font-size: 10pt;
+	margin: 33px;
+	margin-top: 0px;	
+}
+
+h1 {
+	color: darksalmon;
+	font-style: italic;
+	display: block;
+	width: 100%;
+	border-bottom: 1px solid darkolivegreen;
+	padding-bottom: 5px
+}
+
+
+table {
+	margin: 10px;
+	border-collapse: collapse;
+	width: 100%;
+}
+table th {
+	border: 2px solid white;
+	font-weight: bold;
+	background-color: #FFCDAF;
+}
+table th, table td {
+	padding: 4px;
+	text-align: left;
+}
+
+table.usertable {
+	width: auto;
+}
+
+p.notice {
+	background: white;
+	color: green;
+	margin: 1em 0;
+	padding: 4px;
+}
+p.alert {
+	background: white;
+	color: red;
+	margin: 1em 0;
+	padding: 4px;
+}
+
+form label {
+	line-height: 25px;
+	font-weight: bold;
+	color: darkolivegreen;
+}
+
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+nav li {
+	display: inline-block;
+	margin-right: 70px;
+	padding-top: 35px;
+}
+nav a {
+	color: white;
+	text-decoration: none;
+	text-transform: uppercase;
+	font-size: 14px;
+}
+nav a:hover {
+	color: white; 
+	background-color: darkolivegreen;
+	border-radius: 0px
+}
+div.navbar {
+	color: white;
+	font-style: italic;
+	font-size: 12 px;
+	overflow: hidden;
+	width: 100%;
+	margin-top: 0px;
+	margin-left: 0px;
+	background-color: #889E5F;
+
+}
+
+p.userroles {
+	text-align: right;
+}
