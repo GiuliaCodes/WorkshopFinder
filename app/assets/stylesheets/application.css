@@ -39,6 +39,20 @@ a.date {
 	text-decoration: underline;
 }
 
+a.sign-in, a.sign-up {
+	background-color: white; 
+	color: darkolivegreen; 
+	font-weight: bold;
+	padding: 2px 5px;
+	border: 1px solid darkolivegreen; 
+	border-radius: 4px; 
+
+}
+a.sign-in:hover, a.sign-up:hover {
+	background-color: darkolivegreen; 
+	color: white;
+}
+
 a {
 	background: transparent;
 	color: darksalmon;

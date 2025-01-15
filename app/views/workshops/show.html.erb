@@ -1,4 +1,7 @@
+<% if false %>
 <p id="notice"><%= notice %></p>
+<% end %>
+
 
 <h1><%= @workshop.name %></h1>
 <h4> a workshop by <%= User.find(@workshop.organizer_id).username %> </h4>

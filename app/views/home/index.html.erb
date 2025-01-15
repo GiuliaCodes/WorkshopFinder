@@ -6,9 +6,9 @@
  <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
 </div> 
 <% else %>
-  
-  <%= button_to "Sign up", new_user_registration_path, method: :get %> 
-  <%= button_to "Sign in", new_user_session_path %>
+
+  <%= link_to "Sign up", new_user_registration_path, class: "sign-up" %> 
+  <%= link_to "Sign in", new_user_session_path, class: "sign-in" %>
 
   <%- if false %>
   <%= button_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, method: :post, :data => {turbo: "false"} %>

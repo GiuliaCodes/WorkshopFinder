@@ -6,7 +6,7 @@ Feature: sign in
 Scenario: user logs in with a user role
     Given a user
     Given I am on the home page
-    When I click "Sign in"
+    When I follow "Sign in"
     And I fill "Email" with "user@mail.com"
     And I fill "Password" with "userpassword"
     And I click "Log in"
@@ -16,7 +16,7 @@ Scenario: user logs in with a user role
 
 Scenario: failed log in
     Given I am on the home page
-    When I click "Sign in"
+    When I follow "Sign in"
     And I fill "Email" with "another@mail.com"
     And I fill "Password" with "password"
     And I click "Log in"

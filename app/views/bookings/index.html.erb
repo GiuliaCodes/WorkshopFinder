@@ -1,4 +1,7 @@
+<% if false %>
 <p id="notice"><%= notice %></p>
+<% end %>
+
 
 <h1> <%= @workshop.name %> bookings </h1>
 <br> There are <%= Booking.where(workshop_id: @workshop.id).count %> / <%= @workshop.max_partecipants %> partecipants <br>
