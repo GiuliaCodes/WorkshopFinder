@@ -1,5 +1,10 @@
 # README
 
+
+WorkshopFinder: applicazione web per la ricerca e l'organizzazione di Workshop
+Progetto per il laboratorio di architetture software e sicurezza informatica 24/25
+
+------------------------------------------------------------------------------------
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
